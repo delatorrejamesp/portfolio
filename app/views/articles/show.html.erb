@@ -1,0 +1,41 @@
+<div class="container">
+  <img class="mini-img" src="http://placekitten.com/g/500/500"/>
+  <p>
+    <strong>Title:</strong>
+    <%= @article.title %>
+  </p>   
+  <p>
+    <strong>Text:</strong>
+    <%= @article.text %>
+  </p>
+</div>
+<div class ="container">
+  <h2>Comments</h2>
+  <% @article.comments.each do |comment| %>
+    <p>
+      <strong>Commenter:</strong>
+      <%= comment.commenter %>
+    </p>
+    <p>
+      <strong>Comment:</strong>
+      <%= comment.body %>
+    </p>
+  <% end %>
+</div>
+<div class="container">
+  <h2>Add Comment</h2>
+  <%= form_for([@article, @article.comments.build]) do |f| %>
+    <p>
+      <%= f.label :commenter %><br>
+      <%= f.text_field :commenter %>
+    </p>
+    <p>
+      <%= f.label :body %><br>
+      <%= f.text_area :body %>
+    </p>
+    <p>
+      <%= f.submit "Create Comment", :id => "save-button" %>
+    </p>
+  <% end %>
+</div>
+<%= link_to 'Back', articles_path, class: "big button" %>
